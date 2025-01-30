@@ -4,7 +4,8 @@ language: "en"
 locale: en_US
 image: /logos.png
 favicon: /logos.png
-url: "http://localhost:8080"
+url: "https://brutalism.000000076.xyz"
+#url: "http://localhost:8080"
 
 metasocial: 
  - facebook: "https://www.facebook.com/"
