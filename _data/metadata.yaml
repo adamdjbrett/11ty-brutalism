@@ -1,5 +1,5 @@
 title: "11ty Brutalism"
-description: "A 11ty Brutalism by Adam Dj Brett"
+description: "A 11ty Brutalism by Adam DJ Brett"
 language: "en"
 locale: en_US
 image: /logos.png
@@ -23,7 +23,7 @@ navbar:
 
 footer: 
  text1: Designed by
- text2: Adam Dj Brett
+ text2: Adam DJ Brett
  text2_url: https://adamdjbrett.com
 
 author: 

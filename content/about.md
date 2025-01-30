@@ -1,6 +1,6 @@
 ---
 title: About
-description: About Adam Dj Brett
+description: About Adam DJ Brett
 ---
 ### Scholar, Digital Humanist, and Advocate for Justice
 
