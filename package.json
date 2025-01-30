@@ -1,0 +1,43 @@
+{
+	"name": "11ty-brutalism",
+	"version": "1.0.0",
+	"description": "A starter brutal themes for blog web site using the Eleventy site generator.",
+	"type": "module",
+	"scripts": {
+		"build": "npx @11ty/eleventy",
+		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
+		"build-ghpages": "npx @11ty/eleventy --pathprefix=/11ty-brutalism/",
+		"start": "npx @11ty/eleventy --serve --quiet",
+		"start-ghpages": "npx @11ty/eleventy --pathprefix=/11ty-brutalism/ --serve --quiet",
+		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
+		"debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/adamdjbrett/11ty-brutalism.git"
+	},
+	"author": {
+		"name": "Adam Dj Brett",
+		"email": "info@adamdjbrett.com",
+		"url": "https://adamdjbrett.com/"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=20"
+	},
+	"devDependencies": {
+		"@11ty/eleventy": "^3.0.0",
+		"@11ty/eleventy-navigation": "^0.3.5",
+		"@11ty/eleventy-plugin-rss": "^2.0.2",
+		"@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+		"cross-env": "^7.0.3",
+		"html-minifier-terser": "^7.2.0",
+		"luxon": "^3.5.0",
+		"zod": "^3.23.8",
+		"zod-validation-error": "^3.3.1"
+	},
+	"dependencies": {
+		"@zachleat/heading-anchors": "^1.0.1"
+	}
+}

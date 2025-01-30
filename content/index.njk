@@ -1,0 +1,4 @@
+---js
+const numberOfLatestPostsToShow = 5;
+---
+{% set postsCount = collections.posts | length %}{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}{% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}{% set postslistCounter = postsCount %}{% include "postslist.njk" %}<div class="pagination"><p><a aria-label="Read All Article on this website" href="/blog">Explore All Post</a></p></div>
