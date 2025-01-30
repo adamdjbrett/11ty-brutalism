@@ -4,7 +4,7 @@ Brutalism is a simple theme for your blog project. Focus on performance, speed a
 
 Adopts brutal theme with dark light mode.
 
-Developed by []Adam Dj Brett](https://adamdjbrett.com)
+Developed by [Adam Dj Brett](https://adamdjbrett.com)
 
 ![11ty Brutalism by Adam Dj Brett](brutalism.jpg)
 
