@@ -1,0 +1,4 @@
+---
+layout: base.njk
+---
+<article><h1><a href="{{page.url"}}" aria-label="Title article for {{title}}">{{title or metadata.title}}</a></h1><h2>{{description or metadata.description}}</h2>{{ content | safe }}</article>

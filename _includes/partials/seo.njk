@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title or metadata.title}}</title>
+<meta content="{{title or metadata.title}}" property="og:title">
+<meta content="{{title or metadata.title}}" name="twitter:title">
+<meta content="{{title or metadata.title}}" name="title">
+<meta content="{{title or metadata.title}}" property="og:site_name">
+<meta content="{{description or metadata.description}}" name="description">
+<meta content="{{description or metadata.description}}" property="facebook:description">
+<meta content="{{description or metadata.description}}" property="og:description">
+<meta content="{{description or metadata.description}}" name="twitter:description">
+<meta property="twitter:card" content="summary_large_image">
+<meta content="{{image or metadata.metasocial.image}}" name="twitter:image">
+<meta content="{{image or metadata.metasocial.image}}" name="facebook:image">
+<meta content="{{image or metadata.metasocial.image}}" name="og:image">
+<link href="{{metadata.favicon}}" rel="icon" type="image/x-icon">
+<link rel="apple-touch-icon" href="{{metadata.favicon}}">
+<meta content="{{metadata.metasocial.facebook}}" property="facebook:author">
+<meta content="{{metadata.metasocial.twitteruser}}" property="twitter:author">
+<meta content="{{metadata.metasocial.twitter}}" name="twitter:site">
+<meta property="og:type" content="website">
+<link rel="canonical" href="{{metadata.url}}{{page.url}}">
+<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+<meta name="language" content="{{metadata.language}}">
+<meta name="locale" content="{{metadata.locale}}">
+<meta property="og:locale" content="{{metadata.locale}}">
+<meta name="generator" content="{{ eleventy.generator }}"> 
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"{{metadata.description}}","headline":"{{metadata.title}} - {{metadata.description}}","name":"{{metadata.title}}","url":"{{metadata.url}}{{page.url}}"}</script>
+{%- css %}{% include "public/css/brutal.css" %}{% endcss %}
+<style>{% getBundle "css" %}</style>
+{%- js %}{% include "node_modules/@zachleat/heading-anchors/heading-anchors.js" %}{% endjs %}
