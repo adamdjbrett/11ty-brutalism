@@ -32,7 +32,7 @@ jobs:
         run: |
           cat > ./_site/.htaccess << 'EOF'
           RewriteEngine On
-          RewriteBase /olee/
+          RewriteBase /brutalism/
           
           RewriteCond %{REQUEST_FILENAME} !-d
           RewriteCond %{REQUEST_URI} (.+)/$
@@ -63,7 +63,7 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./_site/
-          server-dir: ./public_html/olee/
+          server-dir: ./public_html/brutalism/
           dangerous-clean-slate: true
           security: loose
           exclude: |
@@ -74,4 +74,4 @@ jobs:
             **/package*.json
 
       - name: ✅ Deployment Complete
-        run: echo "🎉 Site live at https://rs-db.fyi/olee/"
+        run: echo "🎉 Site live at https://rs-db.fyi/brutalism/"
