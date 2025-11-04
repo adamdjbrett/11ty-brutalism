@@ -1,0 +1,33 @@
+{
+  // Cloudflare Workers configuration for 11ty-brutalism
+  "name": "brutalism-000000076",
+  "main": "worker.js",
+  "compatibility_date": "2025-11-04",
+  // Deploy to custom domain (zone must exist in your Cloudflare account)
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "brutalism.000000076.xyz/*",
+      "zone_name": "000000076.xyz"
+    }
+  ],
+  // Serve the Eleventy build output as static assets
+  "assets": {
+    "directory": "./_site",
+    "binding": "ASSETS",
+    // Exclude requested files from uploads (defensive; they shouldn’t be in _site anyway)
+    "exclude": [
+      "**/.git*",
+      "**/.git*/**",
+      "**/node_modules/**",
+      "**/.DS_Store",
+      "**/.htaccess",
+      "**/package-lock.json",
+      ".github/workflows/deploy.yml"
+    ]
+  },
+  // Run the site build before publishing via `wrangler deploy`
+  "build": {
+    "command": "npm run build"
+  }
+}
