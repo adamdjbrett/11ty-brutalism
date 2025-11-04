@@ -3,10 +3,13 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import yaml from "js-yaml";
+import fs from "node:fs";
 import pluginFilters from "./_config/filters.js";
 import htmlmin from "html-minifier-terser";
 
 export default async function(eleventyConfig) {
+  // Load site metadata from _data/metadata.yaml
+  const siteMeta = yaml.load(fs.readFileSync("./_data/metadata.yaml", "utf8"));
 
   // Drafts skip
   eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
@@ -32,7 +35,7 @@ export default async function(eleventyConfig) {
   // Plugins
   eleventyConfig.addPlugin(pluginSyntaxHighlight, { preAttributes: { tabindex: 0 } });
   eleventyConfig.addPlugin(pluginNavigation);
-  eleventyConfig.addPlugin(HtmlBasePlugin, { baseHref: "/olee/" }); // <-- important for correct paths
+  eleventyConfig.addPlugin(HtmlBasePlugin, { baseHref: "/" }); // <-- important for correct paths
   eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
 
   // HTML minify
@@ -49,16 +52,29 @@ export default async function(eleventyConfig) {
 
   // RSS Feed plugin
   eleventyConfig.addPlugin(feedPlugin, {
-    type: "atom",
+    type: "atom", // or "rss", "json"
     outputPath: "/feed/feed.xml",
     stylesheet: "pretty-atom-feed.xsl",
-    collection: { name: "posts", limit: 10 },
+    collection: {
+      name: "posts",
+      limit: 10,
+    },
     metadata: {
-      language: "en",
-      title: "Blog Title",
-      subtitle: "This is a longer description about your blog.",
-      base: "https://example.com/olee/",
-      author: { name: "Your Name" }
+      language: siteMeta?.language,
+      title: siteMeta?.title,
+      subtitle: siteMeta?.description,
+      base: siteMeta?.url,
+      author: {
+        name: siteMeta?.author?.name,
+        email: siteMeta?.author?.email,
+        url: siteMeta?.author?.url
+      }
+    },
+    templateData: {
+      eleventyNavigation: {
+        key: "Feed",
+        order: 4
+      }
     }
   });
 
