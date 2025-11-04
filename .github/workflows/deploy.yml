@@ -1,0 +1,77 @@
+name: Build and Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🔄 Checkout
+        uses: actions/checkout@v3
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Remove cache since package-lock.json might not be committed
+
+      - name: 📦 Install Dependencies
+        run: npm install
+
+      - name: 🏗️ Build Site
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 📝 Create .htaccess
+        run: |
+          cat > ./_site/.htaccess << 'EOF'
+          RewriteEngine On
+          RewriteBase /olee/
+          
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteCond %{REQUEST_URI} (.+)/$
+          RewriteRule ^ %1 [R=301,L]
+          
+          RewriteCond %{REQUEST_FILENAME} -d
+          RewriteCond %{REQUEST_URI} !(.*)/$
+          RewriteRule ^(.*)$ $1/ [R=301,L]
+          
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^(.*)$ index.html [L]
+          
+          Options -Indexes
+          AddDefaultCharset UTF-8
+          
+          <IfModule mod_deflate.c>
+            AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
+          </IfModule>
+          EOF
+
+      - name: 🚀 Deploy to cPanel via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./_site/
+          server-dir: ./public_html/olee/
+          dangerous-clean-slate: true
+          security: loose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/package*.json
+
+      - name: ✅ Deployment Complete
+        run: echo "🎉 Site live at https://rs-db.fyi/olee/"
